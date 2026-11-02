@@ -4,16 +4,16 @@
 打包前置条件（由后续打包/收口代理执行，见 installer_README.md）：
   1. pip install pyinstaller
   2. 组装 payload/ 目录（脚本所在目录下）：
-       payload/kit/      ← exam_kit/ 根目录的考试机 kit 文件
+       payload/kit/      ←  根目录的考试机 kit 文件
                            （exam_server.py / cleaner.py / config.json /
-                            启动考试系统.bat / README.md）
-       payload/ 下的组件离线包 ← exam_kit/installer/payload_cache/ 的全部文件
+                            启动考试系统.bat / README.md / candidate-guide.md）
+       payload/ 下的组件离线包 ← installer/payload_cache/ 的全部文件
                            （清单以 components_spec.json 为准，当前 7 个）
   3. pyinstaller installer.spec --noconfirm
   4. 产物：dist/招新考试系统-安装程序.exe（onefile，约 250MB）
 
 约定：installer_app.py 运行时从 sys._MEIPASS/payload/ 读取全部内置资源
-（开发模式回退读 exam_kit/ 根目录 + payload_cache/），组件参数全部来自
+（开发模式回退读  根目录 + payload_cache/），组件参数全部来自
 components_spec.json，本 spec 不涉及任何版本号。
 """
 

@@ -11,3 +11,13 @@ installer/payload/
 
 考试系统日志.txt
 tsnet-socks/tsnet-socks.exe
+.pytest_cache/
+.venv/
+received_sessions/
+考试工作目录/
+安装日志.txt
+*.log
+.env
+.env.*
+**/r2_credentials.json
+**/tailscale-state/

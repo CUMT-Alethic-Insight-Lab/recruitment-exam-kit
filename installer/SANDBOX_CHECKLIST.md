@@ -1,6 +1,6 @@
 # 安装包沙箱验收清单（供全新 Win10 沙箱手工验证）
 
-产物：`exam_kit/installer/dist/招新考试系统-安装程序.exe`（222MB，含全部离线组件，安装全程断网可测）
+产物：`installer/dist/招新考试系统-安装程序.exe`（222MB，含全部离线组件，安装全程断网可测）
 
 ## A. 安装前（沙箱准备）
 
@@ -18,7 +18,7 @@
 
 ## C. 安装后核对（开 cmd 逐条跑）
 
-- [ ] 桌面出现文件夹 `招新考试系统-删除文件夹即完成卸载`，内有：exam_server.py、cleaner.py、config.json、启动考试系统.bat、README.md、考试工作目录\、（安装日志.txt）
+- [ ] 桌面出现文件夹 `招新考试系统-删除文件夹即完成卸载`，内有：exam_server.py、cleaner.py、config.json、启动考试系统.bat、README.md、candidate-guide.md、考试工作目录\、（安装日志.txt）
 - [ ] 桌面出现快捷方式「启动考试系统」
 - [ ] `python --version` → 3.12.x（新开 cmd 才能见到 PATH）
 - [ ] `node --version` → v24.20.0；`git --version` → 2.55.0

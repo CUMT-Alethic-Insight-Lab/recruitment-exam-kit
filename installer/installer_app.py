@@ -44,7 +44,7 @@ SHORTCUT_DESC = "Alethic Insight 社团招新机试平台"
 
 REQUIRED_KIT_FILES = ["exam_server.py", "cleaner.py", "config.json",
                       "启动考试系统.bat", "启动机试服务.bat"]
-OPTIONAL_KIT_FILES = ["README.md", "session_receiver.py", "启动会话接收服务.bat"]
+OPTIONAL_KIT_FILES = ["README.md", "candidate-guide.md", "session_receiver.py", "启动会话接收服务.bat"]
 
 AGENT_LABELS = {"kimi": "Kimi Code", "opencode": "opencode"}
 
@@ -127,7 +127,7 @@ def load_spec(logger=None):
 
 class Payload:
     """打包资源定位：frozen 时全部在 sys._MEIPASS/payload/；
-    开发模式 kit 文件直接读 exam_kit/ 根目录、组件读 payload_cache/。"""
+    开发模式 kit 文件直接读本仓根目录、组件读 payload_cache/。"""
 
     def __init__(self, kit_dir, comp_dir, dev=False):
         self.kit_dir = Path(kit_dir)
@@ -145,7 +145,7 @@ def locate_payload():
     candidate = APP_BASE / "payload"
     if (candidate / "kit").is_dir() or candidate.is_dir():
         return Payload(candidate / "kit", candidate, dev=False)
-    # 开发模式回退：本脚本在 exam_kit/installer/ 下时
+    # 开发模式回退：本脚本在 installer/ 下时
     kit_dir = APP_BASE.parent
     comp_dir = APP_BASE / "payload_cache"
     if (kit_dir / "exam_server.py").is_file() and comp_dir.is_dir():

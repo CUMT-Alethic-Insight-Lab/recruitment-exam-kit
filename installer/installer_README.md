@@ -21,7 +21,7 @@ spec 里标 TODO 的占位字段以 R1 的 COMPONENTS.md 为准回填。
 ## 本地开发模式运行
 
 ```bat
-cd exam_kit\installer
+cd installer
 python installer_app.py          :: 图形向导（dev 模式：kit 文件读 ..\，
                                  ::  组件包直接读 payload_cache\，不复制不修改）
 python installer_app.py --debug  :: 日志附加子进程原始输出
@@ -65,7 +65,7 @@ REG_EXPAND_SZ，ctypes 广播 WM_SETTINGCHANGE，绝不覆盖已有条目）→ 
 
 ```bat
 pip install pyinstaller
-:: 1) 组装 payload\：payload\kit\ ← exam_kit 根目录 kit 文件；
+:: 1) 组装 payload\：payload\kit\ ← 本仓 根目录 kit 文件；
 ::    payload\ 下放 payload_cache 的 7 个组件包
 :: 2)
 pyinstaller installer.spec --noconfirm
@@ -79,7 +79,7 @@ pyinstaller installer.spec --noconfirm
 维护机一条命令完成校验→组装→打包→自检（`build_installer.py`，本目录归属）：
 
 ```bat
-cd exam_kit\installer
+cd installer
 python build_installer.py
 ```
 
@@ -87,7 +87,7 @@ python build_installer.py
   装依赖，目标机全程离线。
 - **payload_cache 校验**：脚本对 7 个离线包逐一核对 SHA256（与 components_spec.json），
   缺失/不符时**不自动下载**，打印 COMPONENTS.md 里的官方 URL 手动下载重放即可。
-- **payload/ 组装**：`payload\kit\` ← exam_kit 根目录 kit 文件（清单从 installer_app.py
+- **payload/ 组装**：`payload\kit\` ← 本仓 根目录 kit 文件（清单从 installer_app.py
   的 REQUIRED/OPTIONAL_KIT_FILES 解析，自动对齐）+ 7 个离线包原样 + components_spec.json。
 - **打包**：`pyinstaller installer.spec --noconfirm`，产物 `dist\招新考试系统-安装程序.exe`。
 
@@ -105,7 +105,7 @@ python build_installer.py
 **坑**：
 - kit 的 config.json / exam_server.py 若在构建后被其它线改动，重跑一遍
   `python build_installer.py` 即可（重新组装 payload/ 并重打，不算返工）。
-- 构建产物目录 `build/ dist/ payload/` 均已加入 exam_kit/.gitignore，不入库。
+- 构建产物目录 `build/ dist/ payload/` 均已加入根目录 `.gitignore`，不入库；考生指南现为根目录 `candidate-guide.md`，随安装器一并复制。
 - 打包后 exe 为 windowed（无控制台），从 cmd 干跑时看不到白话日志输出，以退出码
   和 stage 目录产物树为准（开发态 `python installer_app.py --stage ...` 才有完整输出）。
 
@@ -113,7 +113,7 @@ python build_installer.py
 
 ```
 <stage>\
-├─ exam_server.py / cleaner.py / config.json / 启动考试系统.bat / README.md
+├─ exam_server.py / cleaner.py / config.json / 启动考试系统.bat / README.md / candidate-guide.md
 ├─ config.json        agent=<选择> agent_workdir=<stage>\考试工作目录，其余 kit 默认
 ├─ 启动考试系统.lnk   （干跑放在 stage 目录内，不写真实桌面）
 └─ 考试工作目录\请在此文件夹里使用 AI 工具作答.txt

@@ -20,7 +20,7 @@ tailnet 直传实验室主机接收机（复用 lan 分流协议 + SOCKS5），�
 M12 隐私口径：不再默认自动扫描会话库；「在考试工作区帮我找」按钮点击后才扫描，
 且只列出目录属于考试工作区的会话（opencode.db / opencode 导出 JSON / kimi 会话索引），
 绝不默认读取全盘会话内容。
-云端 API 见 server/app/routes/exam.py 与 server/app/routes/auth.py。
+云端 API 见 recruitment-exam-platform/server/app/routes/exam.py 与 recruitment-exam-platform/server/app/routes/auth.py。
 """
 
 import atexit
@@ -64,8 +64,8 @@ ATTACHMENT_MAX_BYTES = 50 * 1024 * 1024  # 补充材料 zip 上限 50MB（与云
 EXPORT_MAX_BYTES = 2 * 1024 * 1024 * 1024  # 手动提供的会话导出文件上限 2GB（清洗器已流式化）
 
 # 机试包自身版本（OTA 检测用）：格式 YYYY.M.D-N，与云端
-# server/static/kit-version.json 的 version 按 int 元组比较。发新安装包时
-# 同步抬高这里与 kit-version.json（步骤见 README「维护」段）。
+# recruitment-exam-platform/server/static/kit-version.json 的 version 按 int 元组比较。发新安装包时
+# 同步抬高这里与 kit-version.json（步骤见 README「构建与安装包发布」段）。
 KIT_VERSION = "2026.10.13-1"
 
 DEFAULT_CONFIG = {
@@ -108,7 +108,7 @@ QUESTION_IDS_MAX = 3
 AGENTS = ("kimi", "opencode")
 AGENT_LABELS = {"kimi": "Kimi Code", "opencode": "opencode"}
 
-# 领域 key -> 中文名（与 server/app/constants.py 的 DOMAINS 对齐；用于答题文件夹命名）
+# 领域 key -> 中文名（与 recruitment-exam-platform/server/app/constants.py 的 DOMAINS 对齐；用于答题文件夹命名）
 # 机试领域为 7 个（aix 已裁撤、ai_safety 为面试素材不进机试，均不在此列）
 DOMAIN_LABELS = {
     "llm_arch": "语言/LLM（偏架构）",
@@ -251,7 +251,7 @@ PBKDF2_DKLEN = 32
 
 
 def compute_client_hash(password: str, salt: str) -> str:
-    """与浏览器 WebCrypto 端互通的 PBKDF2 客户端散列（契约见 server/app/auth.py）。"""
+    """与浏览器 WebCrypto 端互通的 PBKDF2 客户端散列（契约见 recruitment-exam-platform/server/app/auth.py）。"""
     return hashlib.pbkdf2_hmac(
         "sha256", password.encode("utf-8"), bytes.fromhex(salt),
         PBKDF2_ITERATIONS, PBKDF2_DKLEN).hex()
@@ -1589,7 +1589,7 @@ def pick_opencode_candidates(sessions: list[dict], since_ms: int,
 
 # ---------- opencode.db（v1.18.29+ 会话 SQLite 存储）----------
 
-# 表结构勘察结论见 exam_kit/docs_opencode_db.md（时间一律 epoch 毫秒 int）。
+# 表结构勘察结论见 docs_opencode_db.md（时间一律 epoch 毫秒 int）。
 OPENCODE_DB_NAME = "opencode.db"
 OPENCODE_EXPORT_TIMEOUT = 120  # 与 kimi export 一致的 CLI 超时
 

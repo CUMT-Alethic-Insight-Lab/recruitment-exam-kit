@@ -1,7 +1,7 @@
 # M11 安装器组件事实清单（R1 研究线产出，实测验证日期 2026-09-05）
 
 本文是安装器开发代理（波次 A）的**唯一事实来源**。所有文件已下载到
-`exam_kit/installer/payload_cache/`（该目录不入库，见 exam_kit/.gitignore），
+`installer/payload_cache/`（该目录不入库，见 .gitignore），
 全部哈希为自算 SHA256，其中 Node.js / opencode 已与官方发布哈希交叉比对一致。
 
 payload_cache 总体积 337,369,009 bytes ≈ 337 MB（7 个文件，2026-09-30 追加 tsnet-socks.zip），
@@ -190,8 +190,8 @@ Web UI（官方文档 opencode.ai/docs/web/ + /docs/cli/）：
 
 | 项 | 值 |
 |---|---|
-| 性质 | **非官网下载件**——仓库内 `go build` 产出。源码：`exam_kit/tsnet-socks/main.go` + `go.mod`（模块 `alethic/tsnet-socks`），依赖 `tailscale.com v1.102.4` 的 **tsnet 用户态协议栈** + `github.com/armon/go-socks5`，Go 1.26.6 |
-| 构建命令 | `cd exam_kit/tsnet-socks && CGO_ENABLED=0 go build -ldflags="-s -w" -o tsnet-socks.exe .` |
+| 性质 | **非官网下载件**——仓库内 `go build` 产出。源码：`tsnet-socks/main.go` + `go.mod`（模块 `alethic/tsnet-socks`），依赖 `tailscale.com v1.102.4` 的 **tsnet 用户态协议栈** + `github.com/armon/go-socks5`，Go 1.26.6 |
+| 构建命令 | `cd tsnet-socks && CGO_ENABLED=0 go build -ldflags="-s -w" -o tsnet-socks.exe .` |
 | 文件名 | tsnet-socks.zip（zip 根层**恰好一个文件** `tsnet-socks.exe`，无子目录） |
 | 大小 | 8,656,141 bytes（zip）；zip 内 exe 22,582,272 bytes |
 | SHA256 | zip：`8ffb36476db3814cf781ad2121f951eb9dcd52789460d287172357bb23053442`；zip 内 exe：`66704076f24f7245e8b07535ded8d6fc9a6b60c6858e4ed2942d5328665fd805`（均自算） |
@@ -211,7 +211,7 @@ Web UI（官方文档 opencode.ai/docs/web/ + /docs/cli/）：
 
 重制步骤（即 build_installer.py DOWNLOAD_HINTS 的展开）：
 
-1. `cd exam_kit/tsnet-socks && CGO_ENABLED=0 go build -ldflags="-s -w" -o tsnet-socks.exe .`
+1. `cd tsnet-socks && CGO_ENABLED=0 go build -ldflags="-s -w" -o tsnet-socks.exe .`
 2. 把 `tsnet-socks.exe` 单文件平铺打进 zip 根层 → `payload_cache/tsnet-socks.zip`，
    自算 SHA256 回填 components_spec.json（组件 `tailscale`）。
 

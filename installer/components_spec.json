@@ -164,7 +164,7 @@
       "path_append": [
         "%LOCALAPPDATA%\\Programs\\AlethicTools\\tailscale"
       ],
-      "notes": "非官网下载件：仓库内 go build 产出（源码 exam_kit/tsnet-socks/main.go + go.mod，基于 tailscale.com v1.102.4 的 tsnet 用户态协议栈 + armon/go-socks5；构建命令：cd exam_kit/tsnet-socks && CGO_ENABLED=0 go build -ldflags=\"-s -w\" -o tsnet-socks.exe .），把单个 tsnet-socks.exe（22,582,272 bytes）打成 zip 根层平铺包。相比 stock tailscaled 双 exe 方案：免管理员、免 TUN 驱动、免命名管道，节点 ephemeral（服务端 30min 无活动自动蒸发），拉起后输出 READY <tailnet-ip> 并以 SOCKS5 127.0.0.1:1055 供 curl 走代理上传。组件 id 与 target_dir 保持 tailscale 不变（kit 侧 exam_server.py 以 tailscale_dir 约定找 exe）。二进制无 --version/自检旗标——裸跑固定输出 FAIL usage 行并以 rc=2 退出（设计如此，入网必须带 -control-url/-auth-key），故不配 post_install_check，只以 verify_files 落盘校验 + verify_cmds（where，走 PATH）探测。zip 哈希自算；zip 内 exe 与 go build 原件逐字节一致（SHA256 比对），裸跑实测输出 FAIL usage、rc=2。重制步骤见 COMPONENTS.md §7 与 build_installer.py DOWNLOAD_HINTS。"
+      "notes": "非官网下载件：仓库内 go build 产出（源码 tsnet-socks/main.go + go.mod，基于 tailscale.com v1.102.4 的 tsnet 用户态协议栈 + armon/go-socks5；构建命令：cd tsnet-socks && CGO_ENABLED=0 go build -ldflags=\"-s -w\" -o tsnet-socks.exe .），把单个 tsnet-socks.exe（22,582,272 bytes）打成 zip 根层平铺包。相比 stock tailscaled 双 exe 方案：免管理员、免 TUN 驱动、免命名管道，节点 ephemeral（服务端 30min 无活动自动蒸发），拉起后输出 READY <tailnet-ip> 并以 SOCKS5 127.0.0.1:1055 供 curl 走代理上传。组件 id 与 target_dir 保持 tailscale 不变（kit 侧 exam_server.py 以 tailscale_dir 约定找 exe）。二进制无 --version/自检旗标——裸跑固定输出 FAIL usage 行并以 rc=2 退出（设计如此，入网必须带 -control-url/-auth-key），故不配 post_install_check，只以 verify_files 落盘校验 + verify_cmds（where，走 PATH）探测。zip 哈希自算；zip 内 exe 与 go build 原件逐字节一致（SHA256 比对），裸跑实测输出 FAIL usage、rc=2。重制步骤见 COMPONENTS.md §7 与 build_installer.py DOWNLOAD_HINTS。"
     }
   },
   "install_order": [

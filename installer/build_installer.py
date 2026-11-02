@@ -58,9 +58,9 @@ DOWNLOAD_HINTS = {
         "（非下载件）构建机执行：npm install --prefix <tmp> @moonshot-ai/kimi-code@0.40.1 "
         "后对整个 node_modules/ 打 zip，重制步骤见 installer/COMPONENTS.md §5",
     "tsnet-socks.zip":
-        "（非下载件）仓库内 go build 产出：cd exam_kit/tsnet-socks && "
+        "（非下载件）仓库内 go build 产出：cd tsnet-socks && "
         "CGO_ENABLED=0 go build -ldflags=\"-s -w\" -o tsnet-socks.exe . "
-        "（源码 exam_kit/tsnet-socks/main.go + go.mod），再把 tsnet-socks.exe "
+        "（源码 tsnet-socks/main.go + go.mod），再把 tsnet-socks.exe "
         "单文件打成 zip 根层平铺包，详见 installer/COMPONENTS.md §7",
 }
 
@@ -135,7 +135,7 @@ def assemble_payload():
         shutil.copy2(src, kit_dir / name)
         log("  [kit] %s (%d bytes)" % (name, src.stat().st_size))
     if missing_required:
-        raise SystemExit("exam_kit/ 根目录缺 kit 文件：%s" % missing_required)
+        raise SystemExit("本仓根目录缺 kit 文件：%s" % missing_required)
 
     spec = json.loads(SPEC_JSON.read_text(encoding="utf-8"))
     for comp in spec["components"].values():

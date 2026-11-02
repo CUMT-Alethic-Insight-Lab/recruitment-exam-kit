@@ -38,7 +38,8 @@ $files = @(
     "exam_server.py",
     "config.json",
     "AlethicInsight社团招新机试平台.ps1",
-    "README.md"
+    "README.md",
+    "candidate-guide.md"
 )
 foreach ($f in $files) {
     $src = Join-Path $KitDir $f
