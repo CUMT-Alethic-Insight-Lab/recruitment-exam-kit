@@ -95,7 +95,7 @@ python build_installer.py             # 校验、组装、打包、自检
 
 本仓从上述平台固定提交执行 `git subtree split --prefix=exam_kit`，拆分顶点为
 `13e6d9fb7a0f9e846c69d5aa070b343af67ac481`。历史仅保留该子目录的提交，文件直接位于仓库根部；subtree 拆分会重写提交 ID，旧仓原提交仍是审计来源。后续改动以本仓为权威，不再同时修改旧仓 `exam_kit/`。
-原仓及其未提交内容保留，迁移不删除旧目录，也不改动平台线上服务。
+原仓及其未提交内容保留。原 `exam_kit/` 完整本地副本（含构建物、runtime、pending 等排除内容）现位于 `P:/AlethicInsightWorkspace/private-data/legacy-exam-kit-local`，不进入本公共仓；平台线上服务未因拆分改动。
 
 - 源码回滚：使用已知良好提交/版本建立修复分支并通过普通 revert 或修复提交交付，不强推重写公共 `main`；需要比对原实现时检查上述 split 顶点。
 - 运行包回滚：停掉本地考试服务，备份含隐私数据的状态/补传文件到受控位置，由维护者确认兼容性后重新安装已验证包，不覆盖正在运行的程序或丢弃未交卷材料。
