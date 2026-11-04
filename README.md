@@ -5,7 +5,7 @@ Alethic Insight 招新机试的 **Windows 考生端、会话清洗器与离线�
 
 - 考生使用说明：[candidate-guide.md](candidate-guide.md)（安装包也携带此文件）。
 - 本仓权威来源：<https://github.com/CUMT-Alethic-Insight-Lab/recruitment-exam-kit>。
-- 服务端与 HTTP 契约权威来源：[recruitment-exam-platform](https://github.com/CUMT-Alethic-Insight-Lab/recruitment-exam-platform)。
+- 服务端与 HTTP 契约权威来源：[alethicinsight-platform](https://github.com/CUMT-Alethic-Insight-Lab/alethicinsight-platform)。
 
 ## 职责与边界
 
@@ -25,7 +25,7 @@ AI 工具和离线组件是第三方软件，不由本项目维护。
 ## 平台 API 与版本兼容
 
 本次迁移不改变运行协议或 `KIT_VERSION`：基线为平台仓提交
-[`c97b980d75c2eeb730c4ca68f240b9ca2b253a00`](https://github.com/CUMT-Alethic-Insight-Lab/recruitment-exam-platform/commit/c97b980d75c2eeb730c4ca68f240b9ca2b253a00)
+[`c97b980d75c2eeb730c4ca68f240b9ca2b253a00`](https://github.com/CUMT-Alethic-Insight-Lab/alethicinsight-platform/commit/c97b980d75c2eeb730c4ca68f240b9ca2b253a00)
 中的 `exam_kit/`，客户端版本为 `2026.10.13-1`。这是迁移兼容基线，**不是对所有后续平台版本的兼容承诺**；目前没有独立的 API 语义版本协商机制。
 
 - `cloud_base` 是平台根前缀（默认示例 `https://alethicinsight.com/recruitment`），`campaign_id` 是届次；本地开发必须改为本地测试平台，不要使用真实考生账号或生产地址做冒烟测试。
