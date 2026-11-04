@@ -19,8 +19,17 @@ Alethic Insight 招新机试的 **Windows 考生端、会话清洗器与离线�
 | `test_*.py` | 合成数据驱动的单元与本地 HTTP 流程测试 |
 
 本仓不包含平台服务端、报名/评分系统、成员数据、生产部署或前端模板。
-公共 CLI 接口仍归平台仓的 `infra/interface/alethicinsight-cli`，不在这里拆分 CLI 或 MCP。
+`recruitment-exam-kit` 名称不变；组织 CLI/MCP 为同一内部 infra 包，**不是本套件依赖**。它与考生用于作答的第三方 Kimi Code / opencode 不是同一组件。
 AI 工具和离线组件是第三方软件，不由本项目维护。
+
+## 两个产品与当前源码状态
+
+| 产品 | 当前源码与边界 |
+| --- | --- |
+| 招新考试 | 本仓为考生套件；[考试服务端当前源码仓](https://github.com/CUMT-Alethic-Insight-Lab/alethicinsight-platform)负责考试 API。第一阶段隔离目标为该仓根 `server/` 仅承担考试。 |
+| 内部成员与组织平台 | 暂与考试[同源仓](https://github.com/CUMT-Alethic-Insight-Lab/alethicinsight-platform)；组织 API、成员事务、CLI/MCP 属于内部产品，不是考试增量。计划在纠正 PR 中以 `member-platform/server` 和 `member-platform/infra/...` 独立运行。 |
+
+审计基线 `origin/main=229e69c` 的组织 API 实际与考试共 DB、账号和启动流程。**源码待纠正 PR 合入**，因此暂不提供尚不存在的 `main/member-platform` 链接，不以导航更正宣称已解耦。先审查同仓运行隔离，远端重命名及独立仓映射另行处理；`infra-handoff` 仅私有运维，本次未生产部署或迁移真实账号。
 
 ## 平台 API 与版本兼容
 
