@@ -116,7 +116,7 @@
 
 维护者请按 [项目 README 的构建与安装包发布流程](README.md#构建与安装包发布) 操作：
 在本仓更新 `exam_server.py` 的 `KIT_VERSION` 并验证安装包；下载元数据
-`server/static/kit-version.json` 由 **recruitment-exam-platform 仓库**负责审核和发布，
+`server/static/kit-version.json` 由 **alethicinsight-platform 仓库**负责审核和发布，
 不在本仓部署。下载地址可以使用平台的鉴权签发机制，发布时必须记录并填写 SHA256。
 
 > 注意：`version` 一旦发布就不要回退——考生端会把「云端版本回落」视为
