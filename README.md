@@ -5,7 +5,7 @@ Alethic Insight 招新机试的 **Windows 考生端、会话清洗器与离线�
 
 - 考生使用说明：[candidate-guide.md](candidate-guide.md)（安装包也携带此文件）。
 - 本仓权威来源：<https://github.com/CUMT-Alethic-Insight-Lab/recruitment-exam-kit>。
-- 服务端与 HTTP 契约权威来源：[alethicinsight-platform](https://github.com/CUMT-Alethic-Insight-Lab/alethicinsight-platform)。
+- 服务端与 HTTP 契约权威来源：[recruitment-exam-platform](https://github.com/CUMT-Alethic-Insight-Lab/recruitment-exam-platform)。
 
 ## 职责与边界
 
@@ -26,7 +26,7 @@ AI 工具和离线组件是第三方软件，不由本项目维护。
 
 | 产品 | 源码与边界 |
 | --- | --- |
-| 招新考试 | 本仓为考生套件；[alethicinsight-platform](https://github.com/CUMT-Alethic-Insight-Lab/alethicinsight-platform) 的根 `server/` 负责考试 API，保留现有仓名。 |
+| 招新考试 | 本仓为考生套件；[recruitment-exam-platform](https://github.com/CUMT-Alethic-Insight-Lab/recruitment-exam-platform) 的根 `server/` 仅负责考试运行。 |
 | 内部成员与组织平台 | [alethicinsight-member-platform](https://github.com/CUMT-Alethic-Insight-Lab/alethicinsight-member-platform) 负责组织 API、成员事务及同包 CLI/MCP；它是独立内部产品，不是考试增量或本套件依赖。 |
 
 `infra-handoff` 仅供私有运维交接；文档导航不代表生产部署、真实账号迁移或跨仓兼容验收完成。
@@ -105,6 +105,8 @@ python build_installer.py             # 校验、组装、打包、自检
 本仓从上述平台固定提交执行 `git subtree split --prefix=exam_kit`，拆分顶点为
 `13e6d9fb7a0f9e846c69d5aa070b343af67ac481`。历史仅保留该子目录的提交，文件直接位于仓库根部；subtree 拆分会重写提交 ID，旧仓原提交仍是审计来源。后续改动以本仓为权威，不再同时修改旧仓 `exam_kit/`。
 原仓及其未提交内容保留。原 `exam_kit/` 完整本地副本（含构建物、runtime、pending 等排除内容）现位于 `P:/AlethicInsightWorkspace/private-data/legacy-exam-kit-local`，不进入本公共仓；平台线上服务未因拆分改动。
+
+2026-11-17 追加：经用户明确授权，考试仓由 `alethicinsight-platform` 恢复为 [recruitment-exam-platform](https://github.com/CUMT-Alethic-Insight-Lab/recruitment-exam-platform)，GitHub 保留旧 URL 重定向；上述固定提交仍为历史来源。根 `server/` 仅承担考试运行，`main` 的 `member-platform/` 副本仍待 [PR #7](https://github.com/CUMT-Alethic-Insight-Lab/recruitment-exam-platform/pull/7) 移除，不能宣称已完成源码去重。本套件名称不变；考生指南中的 OTA 元数据审核发布者同步恢复为考试仓。本次仅更新文档，不发布安装包、不部署、不迁移数据。
 
 - 源码回滚：使用已知良好提交/版本建立修复分支并通过普通 revert 或修复提交交付，不强推重写公共 `main`；需要比对原实现时检查上述 split 顶点。
 - 运行包回滚：停掉本地考试服务，备份含隐私数据的状态/补传文件到受控位置，由维护者确认兼容性后重新安装已验证包，不覆盖正在运行的程序或丢弃未交卷材料。
